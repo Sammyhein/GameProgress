@@ -1,0 +1,264 @@
+{
+  "id": "2d6df560-ffc2-44df-bb67-768a55d1ab5e",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.category": {
+      "name": "category",
+      "schema": "",
+      "columns": {
+        "id_category": {
+          "name": "id_category",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.games": {
+      "name": "games",
+      "schema": "",
+      "columns": {
+        "id_game": {
+          "name": "id_game",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "release_year": {
+          "name": "release_year",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "previous_game": {
+          "name": "previous_game",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "next_game": {
+          "name": "next_game",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image_url": {
+          "name": "image_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parental_guidance": {
+          "name": "parental_guidance",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "free_to_play": {
+          "name": "free_to_play",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "company_name": {
+          "name": "company_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "online": {
+          "name": "online",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "multiplayer": {
+          "name": "multiplayer",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "video_url": {
+          "name": "video_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.games_category": {
+      "name": "games_category",
+      "schema": "",
+      "columns": {
+        "id_category": {
+          "name": "id_category",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id_game": {
+          "name": "id_game",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "games_category_id_category_fkey": {
+          "name": "games_category_id_category_fkey",
+          "tableFrom": "games_category",
+          "tableTo": "category",
+          "columnsFrom": [
+            "id_category"
+          ],
+          "columnsTo": [
+            "id_category"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "games_category_id_game_fkey": {
+          "name": "games_category_id_game_fkey",
+          "tableFrom": "games_category",
+          "tableTo": "games",
+          "columnsFrom": [
+            "id_game"
+          ],
+          "columnsTo": [
+            "id_game"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.games_platforms": {
+      "name": "games_platforms",
+      "schema": "",
+      "columns": {
+        "id_platform": {
+          "name": "id_platform",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id_game": {
+          "name": "id_game",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "games_platforms_id_platform_fkey": {
+          "name": "games_platforms_id_platform_fkey",
+          "tableFrom": "games_platforms",
+          "tableTo": "platforms",
+          "columnsFrom": [
+            "id_platform"
+          ],
+          "columnsTo": [
+            "id_platform"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "games_platforms_id_game_fkey": {
+          "name": "games_platforms_id_game_fkey",
+          "tableFrom": "games_platforms",
+          "tableTo": "games",
+          "columnsFrom": [
+            "id_game"
+          ],
+          "columnsTo": [
+            "id_game"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.platforms": {
+      "name": "platforms",
+      "schema": "",
+      "columns": {
+        "id_platform": {
+          "name": "id_platform",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
