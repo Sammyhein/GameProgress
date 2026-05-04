@@ -70,6 +70,8 @@ export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   pseudo: text("pseudo").notNull().unique(),
+  firstname: text("firstname").notNull(),
+  lastname: text("lastname").notNull(),
   email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").default(false).notNull(),
   image: text("image"),

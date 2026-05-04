@@ -25,9 +25,9 @@ export default function CreateAccount(){
             <label htmlFor="confirmedPassword">Confirmation de Mot de Passe</label>
             <input type="text" name="confirmedPassword" placeholder="Doit être identique à votre mot de passe" />
 
-            <Link href="/paths/login">
-            <button>Créer</button>
-            </Link>
+            {/* <Link href="/paths/login"> */}
+            <button type="submit">Créer</button>
+            {/* </Link> */}
         </form>
         </>
     )

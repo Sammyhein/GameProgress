@@ -13,4 +13,21 @@ export const auth = betterAuth({
         schema, // Ajoute ton schéma de DB
     }),
     plugins: [nextCookies()], // ⚠️ Permet de sauvegarder les cookies better-auth dans l'appli next
+
+    user: {
+    additionalFields: {
+      firstname: {
+        type: "string",
+        required: true,
+      },
+      pseudo: {
+        type: "string",
+        required: true,
+      },
+      lastname: {
+        type:"string",
+        required: true,
+      }
+    }
+  }
 });
