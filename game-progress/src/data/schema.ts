@@ -1,7 +1,10 @@
-import { pgTable, serial, text, foreignKey, integer, boolean, timestamp, index } from "drizzle-orm/pg-core"
+import { pgTable, serial, text, foreignKey, integer, boolean, timestamp, index, varchar } from "drizzle-orm/pg-core"
 import { sql , relations} from "drizzle-orm"
+import { positive } from "zod";
 
-//Tables
+//---------------------------TABLES---------------------------
+
+//Tables FindYourGame
 export const category = pgTable("category", {
     idCategory: serial("id_category").primaryKey().notNull(),
     name: text().notNull(),
@@ -60,11 +63,13 @@ export const gamesPlatforms = pgTable("games_platforms", {
         }),
 ]);
 
+
 //Tables BetterAuth
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
+  pseudo: text("pseudo").notNull().unique(),
   email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").default(false).notNull(),
   image: text("image"),
@@ -134,7 +139,43 @@ export const verification = pgTable(
   (table) => [index("verification_identifier_idx").on(table.identifier)],
 );
 
-//Relations
+//New Tables
+
+export const userGames = pgTable(
+  "user_games",
+  {
+    id: serial("id").primaryKey().notNull(),
+    userId: text("user_id").references(()=>user.id).notNull(),
+    gameId: integer("game_id").references(() => games.idGame).notNull(),
+    progess: integer("progress").notNull(),
+    playedTime: integer("played_time").notNull(),
+    scale: text("scale").notNull()
+  }
+)
+
+export const opinions = pgTable(
+  "opinions",
+  {
+    id: serial("id").primaryKey().notNull(),
+    isPositive: boolean("is_positive").notNull(),
+    opinion: varchar({ length: 100 }).notNull(),
+    userGamesId: integer("user_games_id").references(()=>userGames.id).notNull()
+  }
+)
+
+export const comments = pgTable(
+  "comments",
+  {
+    id: serial("id").primaryKey().notNull(),
+    userGamesId: integer("user_games_id").references(()=>userGames.id).notNull(),
+    date: timestamp("date").defaultNow().notNull(),
+    comment: text("comment").notNull()
+  }
+)
+
+//---------------------------RELATIONS---------------------------
+
+//Relations FindYourGame
 
 export const gamesCategoryRelations = relations(gamesCategory, ({one}) => ({
     category: one(category, {
@@ -154,6 +195,8 @@ export const categoryRelations = relations(category, ({many}) => ({
 export const gamesRelations = relations(games, ({many}) => ({
     gamesCategories: many(gamesCategory),
     gamesPlatforms: many(gamesPlatforms),
+    //added
+    userGames: many(userGames)
 }));
 
 export const gamesPlatformsRelations = relations(gamesPlatforms, ({one}) => ({
@@ -176,6 +219,8 @@ export const platformsRelations = relations(platforms, ({many}) => ({
 export const userRelations = relations(user, ({ many }) => ({
   sessions: many(session),
   accounts: many(account),
+  //added
+  userGames: many(userGames)
 }));
 
 export const sessionRelations = relations(session, ({ one }) => ({
@@ -191,3 +236,37 @@ export const accountRelations = relations(account, ({ one }) => ({
     references: [user.id],
   }),
 }));
+
+// New Relations 
+
+export const userGamesRelations = relations(userGames,
+  ({one, many}) => ({
+    user: one(user,{
+      fields:[userGames.userId],
+      references: [user.id]
+    }),
+    game: one(games, {
+      fields:[userGames.gameId],
+      references:[games.idGame]
+    }),
+    opinions: many(opinions),
+    comments:many(comments)
+}));
+
+export const opinionsRelations = relations(opinions,
+  ({one}) => ({
+    userGames: one(userGames,{
+      fields:[opinions.userGamesId],
+      references:[userGames.id]
+    })
+  })
+)
+
+export const commentsRelations = relations(comments,
+  ({one}) => ({
+    userGames: one(userGames,{
+      fields:[comments.userGamesId],
+      references:[userGames.id]
+    })
+  })
+)

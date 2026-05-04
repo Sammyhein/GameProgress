@@ -15,6 +15,13 @@
       "when": 1777471558816,
       "tag": "0001_soft_korvac",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1777540375665,
+      "tag": "0002_dazzling_landau",
+      "breakpoints": true
     }
   ]
 }
