@@ -1,10 +1,11 @@
+import { signup } from "@/app/actions/authActions"
 import Link from "next/link"
 
 export default function CreateAccount(){
     return(
         <>
         <h1>LOGO</h1>
-        <form className="flex flex-col">
+        <form className="flex flex-col" action={signup}>
             <h1>Créer un compte !</h1>
 
             <label htmlFor="pseudo">Pseudo</label>
@@ -20,13 +21,15 @@ export default function CreateAccount(){
             <input type="text" name="email" placeholder="clark.kent@gmail.com"/>
 
             <label htmlFor="password">Mot de Passe</label>
-            <input type="text" name="password" placeholder="ex: iAmSuperman"/>
+            <input type="password" name="password" placeholder="ex: iAmSuperman"/>
 
-            <label htmlFor="confirmedPassword">Confirmation de Mot de Passe</label>
-            <input type="text" name="confirmedPassword" placeholder="Doit être identique à votre mot de passe" />
+            {/* <label htmlFor="confirmedPassword">Confirmation de Mot de Passe</label>
+            <input type="text" name="confirmedPassword" placeholder="Doit être identique à votre mot de passe" /> */}
 
             {/* <Link href="/paths/login"> */}
-            <button type="submit">Créer</button>
+            <button 
+            type="submit"
+            >Créer</button>
             {/* </Link> */}
         </form>
         </>

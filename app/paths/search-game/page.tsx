@@ -1,7 +1,9 @@
 "use server"
 
 import Header from "@/app/components/Header"
+import { auth } from "@/auth";
 import { db } from "@/src/data/drizzle"
+import { headers } from "next/headers";
 
 export default async function SearchGame(){
     const gamesList = await db.query.games.findMany({
@@ -19,7 +21,11 @@ export default async function SearchGame(){
   },
 })
 
+const session = await auth.api.getSession({ headers: await headers() });
+
 console.log(gamesList)
+
+console.log(session)
     return(
         <>
         <Header/>

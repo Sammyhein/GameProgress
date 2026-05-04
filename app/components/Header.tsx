@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { signout } from "../actions/authActions"
 
 export default function Header(){
     return(
@@ -10,6 +11,8 @@ export default function Header(){
                 </Link>
                 <span>|</span>
                 <p>Profil</p>
+                <span>|</span>
+                <p onClick={signout}>Deconnexion</p>
             </section>
         </header>
     )

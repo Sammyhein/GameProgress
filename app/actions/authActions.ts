@@ -53,9 +53,10 @@ export const signin = async (formData: FormData) => {
         redirect("/auth/signin?error=true");
     }
 
-    redirect("/"); // on redirige vers la home page une fois connecté
+    redirect("/paths/search-game"); // on redirige vers la home page une fois connecté
 };
 
 export const signout = async () => {
     await auth.api.signOut({headers: await headers()}); // attention à bien passer les headers !
+    redirect("/paths/login")
 };
