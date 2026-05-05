@@ -149,7 +149,7 @@ export const userGames = pgTable(
     id: serial("id").primaryKey().notNull(),
     userId: text("user_id").references(()=>user.id).notNull(),
     gameId: integer("game_id").references(() => games.idGame).notNull(),
-    progess: integer("progress").notNull(),
+    progress: integer("progress").notNull(),
     playedTime: integer("played_time").notNull(),
     scale: text("scale").notNull()
   }

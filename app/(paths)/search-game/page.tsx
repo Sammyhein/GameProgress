@@ -39,6 +39,8 @@ console.log(session)
                 <section key={game.idGame}>
                     <img src={`${game.imageUrl}`} alt="" />
                     <h1>{game.name}</h1>
+                    <button className="p-2 bg-green-500 border-2 border-white rounded-2xl">+</button>
+                    <button className="p-2 bg-red-500 border-2 border-white rounded-2xl">-</button>
                 </section>
             )
         })}
