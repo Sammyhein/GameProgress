@@ -5,7 +5,7 @@ export default function Home() {
     <>
     <header>
       <h1>GameProgress</h1>
-      <Link href="/paths/login">
+      <Link href="/login">
       <button>Se connecter</button>
       </Link>
     </header>
