@@ -4,46 +4,43 @@ import Header from "@/src/components/Header"
 import { auth } from "@/auth";
 import { db } from "@/src/data/drizzle"
 import { headers } from "next/headers";
+import GamesList from "@/src/components/GamesList";
 
 export default async function SearchGame(){
+  //On récupère tous les jeux
     const gamesList = await db.query.games.findMany({
-  with: {
-    gamesCategories: {
       with: {
-        category: true,
+        gamesCategories: {
+          with: {
+            category: true,
+          },
+        },
+        gamesPlatforms: {
+          with: {
+            platform: true,
+          },
+        },
       },
-    },
-    gamesPlatforms: {
-      with: {
-        platform: true,
-      },
-    },
-  },
-})
+    })
 
-const session = await auth.api.getSession({ headers: await headers() });
+  //Comment on récupère des données de la session présente de l'utilisateur
+  const session = await auth.api.getSession({ headers: await headers() });
+  // On récupère les jeux déjà ajoutés par le user
+  const userGamesList = await db.query.userGames.findMany({
+    where: (userGames, { eq }) => eq(userGames.userId, session!.user.id)
+  })
 
-console.log(gamesList)
+  // On crée un tableau des id des jeux déjà ajoutés
+  const userGameId = userGamesList.map(userG => userG.gameId)
 
-console.log(session)
+  // console.log(gamesList)
+  // console.log(session)
     return(
         <>
         <Header/>
-        <p>Recherchez les jeux auxquels vous avez joué ou que vous jouez actuellement afin de les ajouter dans votre bibliothèque</p>
-        <input type="text" placeholder="Rechercher"/>
-
-        <p>Vous voulez jouer un nouveau jeu mais vous ne savez pas lequel ? Cliquez sur le bouton pour avoir des suggestions selon vos critères ! </p>
-        <a href="https://find-your-game-front.vercel.app" className="text-purple-400" target="_blank">Find Your Game</a>
-        {gamesList.map((game)=> {
-            return(
-                <section key={game.idGame}>
-                    <img src={`${game.imageUrl}`} alt="" />
-                    <h1>{game.name}</h1>
-                    <button className="p-2 bg-green-500 border-2 border-white rounded-2xl">+</button>
-                    <button className="p-2 bg-red-500 border-2 border-white rounded-2xl">-</button>
-                </section>
-            )
-        })}
+        <main>
+          <GamesList gamesList={gamesList} userGameId={userGameId}/>
+        </main>
         </>
     )
 }
