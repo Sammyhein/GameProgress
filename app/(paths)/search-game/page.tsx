@@ -34,7 +34,7 @@ export default async function SearchGame(){
   const userGameId = userGamesList.map(userG => userG.gameId)
 
   // console.log(gamesList)
-  // console.log(session)
+  console.log(session)
     return(
         <>
         <Header/>
