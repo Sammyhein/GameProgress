@@ -38,7 +38,7 @@ test("Test pour voir si le pseudo a moins de 2 caractère et ne peut pas être j
 })
 
 test("Test pour voir si un mail non valide ne passe pas" , () => {
-    const result = signupSchema.safeParse({...describe, email:"hey"})
+    const result = signupSchema.safeParse({...validData, email:"hey"})
 
     expect(result.error?.flatten().fieldErrors.email).toStrictEqual(["Vous devez écrire un email valide. Ex: prenom.nom@gmail.com"])
 
@@ -48,5 +48,11 @@ test("Test pour voir si un mail non valide ne passe pas" , () => {
 })
 
 test("Verification que le mot de passe a au moins 8 caractères et n'est pas que des espaces", () => {
+    const passOne = signupSchema.safeParse({...validData, password: "  "})
+
+    expect(passOne.error?.flatten().fieldErrors.password).toStrictEqual(["Le mot de passe doit être à un minimum de 8 caractères et ne doit pas commencer ou finir par un espace"])
+
+    const passTwo = signupSchema.safeParse({...validData, password: "coucou"})
     
+    expect(passTwo.error?.flatten().fieldErrors.password).toStrictEqual(["Le mot de passe doit être à un minimum de 8 caractères et ne doit pas commencer ou finir par un espace"])
 })
