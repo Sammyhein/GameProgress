@@ -4,6 +4,10 @@ import { auth } from "@/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { signupSchema } from "@/src/data/validation/authValidation";
+import { db } from "../data/drizzle";
+import { eq } from "drizzle-orm";
+import { user } from "../data/schema";
+
 
 export type SignupState = {
     errors?: {
@@ -43,6 +47,32 @@ export const signup = async (prevState : SignupState, formData: FormData): Promi
     }
 
     const { firstname, lastname, pseudo, email, password} = result.data
+
+    //Verification pseudo unique
+    const existingPseudo = await db.query.user.findFirst({
+        where: eq(user.pseudo, pseudo)
+    })
+
+    if(existingPseudo){
+        return{
+            errors: {
+                pseudo: ["Ce pseudo est déjà utilisé, choisis-en un autre."]
+            }
+        }
+    }
+
+    //Verification email unique
+    const existingEmail = await db.query.user.findFirst({
+        where: eq(user.email, email)
+    })
+
+    if(existingEmail){
+        return{
+            errors: {
+                email: ["Ce email est déjà utilisé, choisis-en un autre."]
+            }
+        }
+    }
 
     const response = await auth.api.signUpEmail({
         body: {
@@ -93,5 +123,5 @@ export const signin = async (prevState: SigninState, formData: FormData) : Promi
 
 export const signout = async () => {
     await auth.api.signOut({headers: await headers()}); // attention à bien passer les headers !
-    redirect("/login")
+    redirect("/")
 };
