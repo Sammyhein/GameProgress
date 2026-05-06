@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { addGame } from "../actions/user-gamesActions"
+import { addGame } from "../../app/actions/user-gamesActions"
 
 type AddGameModalProps = {
     gameId: number,

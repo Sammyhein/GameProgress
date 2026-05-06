@@ -1,6 +1,6 @@
 "use server"
 
-import Header from "@/app/components/Header"
+import Header from "@/src/components/Header"
 import { auth } from "@/auth";
 import { db } from "@/src/data/drizzle"
 import { headers } from "next/headers";
