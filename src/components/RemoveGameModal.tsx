@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { removeGame } from "../../app/actions/user-gamesActions"
+import { removeGame } from "../actions/user-gamesActions"
 
 type RemoveGameModalProps = {
     gameId: number

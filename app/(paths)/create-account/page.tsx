@@ -1,5 +1,5 @@
 "use client"
-import { signup, type SignupState } from "@/app/actions/authActions"
+import { signup, type SignupState } from "@/src/actions/authActions"
 import Link from "next/link"
 import { useActionState } from "react"
 

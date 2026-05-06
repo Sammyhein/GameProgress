@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { signout } from "../../app/actions/authActions"
+import { signout } from "../actions/authActions"
 
 export default function Header(){
     return(
