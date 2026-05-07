@@ -74,6 +74,37 @@ export default async function Journal({params}: {params: Promise<{gameName : str
                 </div>) : (<p>Non noté</p>)}
 
             </section>
+
+            <section>
+                <h2>Journal de Progression</h2>
+                {}
+                <div>
+                    <input type="text" placeholder="Nouveau commentaire"/>
+                    <button>Ajouter</button>
+                </div>
+            </section>
+
+            <section>
+                <article>
+                    <h3>Ce que j'aime dans ce jeu</h3>
+                    {}
+                    <div>
+                        <input type="text" placeholder="Nouvel avis"/>
+                        <button>Ajouter</button>
+                    </div>
+                </article>
+
+                <article>
+                    <h3>Ce que je n'aime pas dans ce jeu</h3>
+                    {}
+                    <div>
+                        <input type="text" placeholder="Nouvel avis"/>
+                        <button>Ajouter</button>
+                    </div>
+                </article>
+            </section>
+
+
         </main>
         </>
     )
