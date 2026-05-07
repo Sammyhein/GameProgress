@@ -13,9 +13,14 @@ type AddGameModalProps = {
 export default function AddGameModal({ gameId, gameName, onClose}: AddGameModalProps){
     const [progress, setProgress] = useState(0)
     const [playedTime, setPlayedTime]= useState(0)
-    const [scale, setScale] = useState("0")
+    const [scale, setScale] = useState(0)
     const [isPending, setIsPending] = useState(false)
     const dialogRef = useRef<HTMLDialogElement>(null)
+    const [errors, setErrors] = useState<{
+        progress?: string[]
+        playedTime?: string[]
+        scale?: string[]
+    }>({})
 
     // Ouvre la modale dès que le composant est monté
     useEffect(() => {
@@ -35,9 +40,15 @@ export default function AddGameModal({ gameId, gameName, onClose}: AddGameModalP
 
     const handleSubmit = async () => {
         setIsPending(true)
-        await addGame(gameId, progress, playedTime, scale)
+        const result = await addGame(gameId, progress, playedTime, scale)
         setIsPending(false)
-        onClose()
+        
+        if(result.errors){
+            setErrors(result.errors)
+            return // on ne ferme pas le modal si y'a une erreur
+        }
+
+        handleClose()
     }
 
     return (
@@ -51,9 +62,12 @@ export default function AddGameModal({ gameId, gameName, onClose}: AddGameModalP
                 <header>
                     <h2 className="text-lg font-bold">Ajouter {gameName}</h2>
                 </header>
-                <section className="flex flex-col gap-4">
+                <form className="flex flex-col gap-4">
                     <div className="flex flex-col gap-1">
                         <label htmlFor="progress">Progression (%)</label>
+                        {errors.progress && (
+                            <p className="text-red-500 text-sm">{errors.progress[0]}</p>
+                        )}
                         <input 
                             id="progress"
                             type="number"
@@ -62,11 +76,15 @@ export default function AddGameModal({ gameId, gameName, onClose}: AddGameModalP
                             value={progress}
                             onChange={(e) => setProgress(Number(e.target.value))}
                             className="border rounded p-2"
+                            placeholder="0"
                              />
                     </div>
 
                     <div className="flex flex-col gap-1">
                         <label htmlFor="playedTime">Temps de jeu (heures)</label>
+                        {errors.playedTime && (
+                            <p className="text-red-500 text-sm">{errors.playedTime[0]}</p>
+                        )}
                         <input
                             id="playedTime"
                             type="number"
@@ -74,23 +92,27 @@ export default function AddGameModal({ gameId, gameName, onClose}: AddGameModalP
                             value={playedTime}
                             onChange={(e) => setPlayedTime(Number(e.target.value))}
                             className="border rounded p-2"
+                            placeholder="0"
                         />
                     </div>
 
                     <div className="flex flex-col gap-1">
                         <label htmlFor="scale">Note (/10)</label>
+                        {errors.scale && (
+                            <p className="text-red-500 text-sm">{errors.scale[0]}</p>
+                        )}
                         <input
                             id="scale"
                             type="number"
                             min={0}
                             max={10}
-                            value={scale ?? ""}
-                            onChange={(e) => setScale(e.target.value)}
+                            // value={scale ?? ""}
+                            onChange={(e) => setScale(Number(e.target.value))}
                             className="border rounded p-2"
                             placeholder="Optionnel"
                         />
                     </div>
-                </section>
+                </form>
 
                 <footer className="flex gap-2 justify-end">
                     <button onClick={handleClose} className="px-4 py-2 border rounded-xl">

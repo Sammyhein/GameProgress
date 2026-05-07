@@ -7,3 +7,9 @@ export const signupSchema = z.object({
     email: z.email("Vous devez écrire un email valide. Ex: prenom.nom@gmail.com"),
     password: z.string().trim().min(8,"Le mot de passe doit être à un minimum de 8 caractères et ne doit pas commencer ou finir par un espace")
 })
+
+export const addGameSchema = z.object({
+    progress: z.number().min(0, "La progression ne peut pas être négative").max(100, "La progression ne peux pas dépasser 100%"),
+    playedTime: z.number().min(0, "Le temps de jeu ne peut pas être négative"),
+    scale: z.number().min(0, "La note ne peut pas être négative").max(10, "La note ne peux pas dépasser 10").nullable()
+})

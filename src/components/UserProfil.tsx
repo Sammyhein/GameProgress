@@ -37,11 +37,11 @@ export default function UserProfil({userGamesList, pseudo}: UserProfilProps ){
 
                     <section>
                         <p>Temps de jeu</p>
-                        <p>{entry.playedTime}</p>
+                        <p>{entry.playedTime}h</p>
                     </section>
 
                     <section>
-                        {entry.scale && <section>
+                        {entry.scale !== null && <section>
                             <p>Note</p>
                             <p>{entry.scale}/10</p>
                         </section>}

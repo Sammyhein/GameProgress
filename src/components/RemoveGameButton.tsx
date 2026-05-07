@@ -34,7 +34,7 @@ export function RemoveGameButtonJournal({gameId, gameName, pseudo}: RemoveGameJo
     
     return(
         <>
-        <button onClick={() => setShowRemoveModal(true)} className="p-2 bg-red-500 border-2 border-white rounded-2xl">-</button>
+        <button onClick={() => setShowRemoveModal(true)} className="p-2 bg-red-500 border-2 border-white rounded-2xl">Supprimer</button>
 
         {showRemoveModal &&(
             <RemoveGameModalJournal gameId={gameId} gameName={gameName}

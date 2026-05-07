@@ -151,7 +151,7 @@ export const userGames = pgTable(
     gameId: integer("game_id").references(() => games.idGame).notNull(),
     progress: integer("progress").notNull(),
     playedTime: integer("played_time").notNull(),
-    scale: text("scale").notNull()
+    scale: integer("scale")
   }
 )
 

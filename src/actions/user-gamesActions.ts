@@ -6,11 +6,31 @@ import { userGames } from "@/src/data/schema"
 import { and, eq } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
 import { headers } from "next/headers"
+import { addGameSchema } from "../data/validation/authValidation"
 
-export const addGame = async (gameId: number, progress: number, playedTime: number, scale: string) => {
+export type AddGameState={
+    errors?: {
+        progress?: string[]
+        playedTime?: string[]
+        scale ?: string[]
+    }
+    globalError?: string
+}
+
+export const addGame = async (gameId: number, progress: number, playedTime: number, scale: number): Promise<AddGameState> => {
     const session = await auth.api.getSession({ headers : await headers()})
 
     if(!session) throw new Error("Non connecté")
+
+    const result = addGameSchema.safeParse({
+        progress,
+        playedTime,
+        scale: !scale ? null : scale
+    })
+
+    if(!result.success){
+        return {errors: result.error.flatten().fieldErrors}
+    }
 
     await db.insert(userGames).values({
         userId: session.user.id,
@@ -21,6 +41,7 @@ export const addGame = async (gameId: number, progress: number, playedTime: numb
     })
 
     revalidatePath("/search-game")
+    return{}
 }
 
 export const removeGame = async (gameId: number) => {
