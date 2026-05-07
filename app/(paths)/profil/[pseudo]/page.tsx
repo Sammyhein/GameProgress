@@ -30,7 +30,7 @@ export default async function Profil({params}: {params: Promise<{pseudo : string
                 <img  alt="user_image" />
                 <h2>{session?.user.pseudo}</h2>
             </section>
-            <UserProfil userGamesList={userGamesList}/>
+            <UserProfil userGamesList={userGamesList}pseudo={pseudo}/>
         </main>
         </>
     )

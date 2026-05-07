@@ -3,15 +3,20 @@
 import { useState } from "react";
 import { UserGameWithGame } from "../interfaces/types";
 import RemoveGameButton from "./RemoveGameButton";
+import Link from "next/link";
 
 type UserProfilProps = {
     userGamesList: UserGameWithGame[]
+    pseudo: string // pour l'url pour aller ensuite dans le journal
 }
 
-export default function UserProfil({userGamesList}: UserProfilProps ){
+export default function UserProfil({userGamesList, pseudo}: UserProfilProps ){
+
     const [search, setSearch] = useState("")
 
     const filteredGames = userGamesList.filter( entry => entry.game.name.toLowerCase().includes(search.trim().toLowerCase()))
+
+    
 
     return(
         <>
@@ -19,7 +24,9 @@ export default function UserProfil({userGamesList}: UserProfilProps ){
 
         <section>
             {filteredGames.map((entry) =>(
-                <article key={entry.game.idGame}>
+                <Link href={`/profil/${pseudo}/${encodeURIComponent(entry.game.name)}`} key={entry.game.idGame}>
+                <article>
+                    
                     <img src={`${entry.game.imageUrl}`} alt={`${entry.game.name}`} />
                     <h2>{entry.game.name}</h2>
 
@@ -42,6 +49,7 @@ export default function UserProfil({userGamesList}: UserProfilProps ){
                     
                     <RemoveGameButton gameId={entry.gameId} gameName={entry.game.name}/>
                 </article>
+                </Link>
             ))}
         </section>
 
