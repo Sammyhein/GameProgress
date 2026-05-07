@@ -24,9 +24,9 @@ export default function UserProfil({userGamesList, pseudo}: UserProfilProps ){
 
         <section>
             {filteredGames.map((entry) =>(
-                <Link href={`/profil/${pseudo}/${encodeURIComponent(entry.game.name)}`} key={entry.game.idGame}>
-                <article>
-                    
+                
+                <article key={entry.game.idGame}>
+                    <Link href={`/profil/${pseudo}/${encodeURIComponent(entry.game.name)}`}>
                     <img src={`${entry.game.imageUrl}`} alt={`${entry.game.name}`} />
                     <h2>{entry.game.name}</h2>
 
@@ -46,10 +46,11 @@ export default function UserProfil({userGamesList, pseudo}: UserProfilProps ){
                             <p>{entry.scale}/10</p>
                         </section>}
                     </section>
+                    </Link>
                     
                     <RemoveGameButton gameId={entry.gameId} gameName={entry.game.name}/>
                 </article>
-                </Link>
+
             ))}
         </section>
 

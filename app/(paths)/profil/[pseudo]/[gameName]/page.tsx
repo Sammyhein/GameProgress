@@ -2,9 +2,11 @@
 
 import { auth } from "@/auth";
 import Header from "@/src/components/Header"
+import { RemoveGameButtonJournal } from "@/src/components/RemoveGameButton";
 import { db } from "@/src/data/drizzle";
 import { userGames } from "@/src/data/schema";
 import { headers } from "next/headers";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export default async function Journal({params}: {params: Promise<{gameName : string}>}){
@@ -14,6 +16,8 @@ export default async function Journal({params}: {params: Promise<{gameName : str
     const decodeName = decodeURIComponent(gameName)
 
     const session = await auth.api.getSession({ headers: await headers() });
+
+    const pseudo = session?.user.pseudo as string
 
     // On trouve le jeu par son nom
     const game = await db.query.games.findFirst({
@@ -49,7 +53,9 @@ export default async function Journal({params}: {params: Promise<{gameName : str
 
                 <div>
                     <button>Modifier</button>
-                    <button>Supprimer</button>
+                    
+                    <RemoveGameButtonJournal gameId={gameJournal.gameId} gameName={gameJournal.game.name} pseudo={pseudo}/>
+                    
                 </div>
 
                 <div>
