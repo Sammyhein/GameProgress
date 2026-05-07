@@ -3,13 +3,13 @@
 import { useState } from "react"
 import GameButtons from "./GameButtons"
 
-type Game = {
+export type Game = {
     idGame: number
     name: string
     imageUrl: string | null
 }
 
-type GamesListProps = {
+export type GamesListProps = {
     gamesList : Game[]
     userGameId: number[]
 }

@@ -2,6 +2,7 @@
 
 import { auth } from "@/auth";
 import Header from "@/src/components/Header"
+import UserProfil from "@/src/components/UserProfil";
 import { db } from "@/src/data/drizzle";
 import { games, userGames } from "@/src/data/schema";
 import { headers } from "next/headers";
@@ -24,7 +25,13 @@ export default async function Profil({params}: {params: Promise<{pseudo : string
     return(
         <>
         <Header/>
-
+        <main>
+           <section>
+                <img  alt="user_image" />
+                <h2>{session?.user.pseudo}</h2>
+            </section>
+            <UserProfil userGamesList={userGamesList}/>
+        </main>
         </>
     )
 }
