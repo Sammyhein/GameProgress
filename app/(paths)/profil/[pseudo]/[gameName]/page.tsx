@@ -2,6 +2,7 @@
 
 import { auth } from "@/auth";
 import Header from "@/src/components/Header"
+import ModifyGameButton from "@/src/components/ModifyGameButton";
 import { RemoveGameButtonJournal } from "@/src/components/RemoveGameButton";
 import { db } from "@/src/data/drizzle";
 import { userGames } from "@/src/data/schema";
@@ -52,7 +53,7 @@ export default async function Journal({params}: {params: Promise<{gameName : str
                 <h1>{gameJournal.game.name}</h1>
 
                 <div>
-                    <button>Modifier</button>
+                    <ModifyGameButton gameId={gameJournal.gameId} gameName={gameJournal.game.name} actualProgress={gameJournal.progress} actualPlayedTime={gameJournal.playedTime} actualScale={gameJournal.scale}/>
                     
                     <RemoveGameButtonJournal gameId={gameJournal.gameId} gameName={gameJournal.game.name} pseudo={pseudo}/>
                     

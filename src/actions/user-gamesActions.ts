@@ -58,3 +58,34 @@ export const removeGame = async (gameId: number) => {
 
     revalidatePath("/search-game")
 }
+
+export const modifyGame = async (gameId: number, progress: number, playedTime: number, scale: number | null, currentPath: string): Promise<AddGameState> => {
+    const session = await auth.api.getSession({ headers: await headers() })
+    if (!session) throw new Error("Non connecté")
+
+    const result = addGameSchema.safeParse({
+        progress,
+        playedTime,
+        scale: !scale ? null : scale,
+    })
+
+    if(!result.success){
+        return { errors: result.error.flatten().fieldErrors}
+    }
+    
+    await db.update(userGames)
+    .set({
+      progress: result.data.progress,
+      playedTime: result.data.playedTime,
+      scale: result.data.scale,
+    })
+    .where(
+      and(
+        eq(userGames.userId, session.user.id),
+        eq(userGames.gameId, gameId)
+      )
+    )
+
+    revalidatePath(currentPath)
+    return {}
+}
