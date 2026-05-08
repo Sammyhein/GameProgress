@@ -6,9 +6,7 @@ import JournalForm from "@/src/components/JournalForm";
 import ModifyGameButton from "@/src/components/ModifyGameButton";
 import { RemoveGameButtonJournal } from "@/src/components/RemoveGameButton";
 import { db } from "@/src/data/drizzle";
-import { userGames } from "@/src/data/schema";
 import { headers } from "next/headers";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export default async function Journal({params}: {params: Promise<{gameName : string}>}){
@@ -29,10 +27,12 @@ export default async function Journal({params}: {params: Promise<{gameName : str
     if(!game) return notFound()
 
     // on récupère le jeu par rapport au user avec toutes les infos
-    const [gameJournal] = await db.query.userGames.findMany({
+    const gameJournal = await db.query.userGames.findFirst({
         with: {
             game: true,
-            comments: true,
+            comments: {
+                orderBy: (comments, { desc }) => [desc(comments.createdDate)]
+            },
             opinions: true
         },
         where: (userGames, { eq , and}) => 
@@ -41,9 +41,9 @@ export default async function Journal({params}: {params: Promise<{gameName : str
                 eq(userGames.gameId, game.idGame)
             )
     })
-    console.log(gameJournal)
+    //console.log(gameJournal)
 
-
+    if(!gameJournal) return notFound()
 
     return(
         <>
@@ -85,11 +85,22 @@ export default async function Journal({params}: {params: Promise<{gameName : str
 
             <section>
                 <h2>Journal de Progression</h2>
-                {}
-                {/* <form>
-                    <input type="text" placeholder="Nouveau commentaire"/>
-                    <button>Ajouter</button>
-                </form> */}
+                {gameJournal.comments.map((journal) => (
+                    <div key={journal.id}>
+                        <img  alt="icon" />
+                        <p>
+                            À
+                            <span>{` ${new Date(journal.createdDate).toLocaleTimeString("fr-FR", {
+                                hour: "2-digit",
+                                minute: "2-digit"
+                                })} `}
+                            </span>
+                            Le
+                            <span>{` ${new Date(journal.createdDate).toLocaleDateString("fr-FR")}`}</span>
+                        </p>
+                        <p>{journal.comment}</p>
+                    </div>
+                ))}
                 <JournalForm gameId={game.idGame}/>
             </section>
 
@@ -112,7 +123,6 @@ export default async function Journal({params}: {params: Promise<{gameName : str
                     </div>
                 </article>
             </section>
-
 
         </main>
         </>

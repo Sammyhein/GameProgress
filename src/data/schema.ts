@@ -170,7 +170,7 @@ export const comments = pgTable(
   {
     id: serial("id").primaryKey().notNull(),
     userGamesId: integer("user_games_id").references(()=>userGames.id).notNull(),
-    date: timestamp("date").defaultNow().notNull(),
+    createdDate: timestamp("created_date").defaultNow().notNull(),
     comment: text("comment").notNull()
   }
 )

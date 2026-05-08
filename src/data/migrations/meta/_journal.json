@@ -43,6 +43,13 @@
       "when": 1778159294225,
       "tag": "0005_young_molten_man",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1778245057617,
+      "tag": "0006_purple_maelstrom",
+      "breakpoints": true
     }
   ]
 }
