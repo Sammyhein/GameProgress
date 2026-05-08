@@ -48,3 +48,15 @@ export const addComment = async (gameId: number, currentPath: string, prevState:
     revalidatePath(currentPath)
     return{}
 }
+
+export const removeComment = async(commentId : number, currentPath: string) => {
+    const session = await auth.api.getSession({ headers: await headers() })
+
+    if(!session) throw new Error("Non connecté")
+
+    await db.delete(comments).where(
+        eq(comments.id, commentId)
+    )
+
+    revalidatePath(currentPath)
+}

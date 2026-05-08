@@ -4,6 +4,7 @@ import { auth } from "@/auth";
 import Header from "@/src/components/Header"
 import JournalForm from "@/src/components/JournalForm";
 import ModifyGameButton from "@/src/components/ModifyGameButton";
+import RemoveCommentButton from "@/src/components/RemoveCommentButton";
 import { RemoveGameButtonJournal } from "@/src/components/RemoveGameButton";
 import { db } from "@/src/data/drizzle";
 import { headers } from "next/headers";
@@ -88,6 +89,8 @@ export default async function Journal({params}: {params: Promise<{gameName : str
                 {gameJournal.comments.map((journal) => (
                     <div key={journal.id}>
                         <img  alt="icon" />
+                        {/* <button>x</button> */}
+                        <RemoveCommentButton commentId={journal.id}/>
                         <p>
                             À
                             <span>{` ${new Date(journal.createdDate).toLocaleTimeString("fr-FR", {
