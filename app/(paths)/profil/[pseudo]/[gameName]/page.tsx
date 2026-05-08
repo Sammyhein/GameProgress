@@ -2,6 +2,7 @@
 
 import { auth } from "@/auth";
 import Header from "@/src/components/Header"
+import JournalForm from "@/src/components/JournalForm";
 import ModifyGameButton from "@/src/components/ModifyGameButton";
 import { RemoveGameButtonJournal } from "@/src/components/RemoveGameButton";
 import { db } from "@/src/data/drizzle";
@@ -85,10 +86,11 @@ export default async function Journal({params}: {params: Promise<{gameName : str
             <section>
                 <h2>Journal de Progression</h2>
                 {}
-                <div>
+                {/* <form>
                     <input type="text" placeholder="Nouveau commentaire"/>
                     <button>Ajouter</button>
-                </div>
+                </form> */}
+                <JournalForm gameId={game.idGame}/>
             </section>
 
             <section>

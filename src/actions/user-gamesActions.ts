@@ -6,7 +6,7 @@ import { userGames } from "@/src/data/schema"
 import { and, eq } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
 import { headers } from "next/headers"
-import { addGameSchema } from "../data/validation/authValidation"
+import { addGameSchema } from "../data/validation/gamesValidation"
 
 export type AddGameState={
     errors?: {
