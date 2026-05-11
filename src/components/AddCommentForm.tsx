@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 const initialState : AddCommentState = {}
 
-export default function JournalForm({gameId}: {gameId: number}){
+export default function AddCommentForm({gameId}: {gameId: number}){
     const pathname= usePathname()
     const [state, formAction, isPending] = useActionState(addComment.bind(null, gameId, pathname), initialState)
     return(

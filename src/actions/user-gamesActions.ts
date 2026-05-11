@@ -2,7 +2,7 @@
 
 import { auth } from "@/auth"
 import { db } from "@/src/data/drizzle"
-import { userGames } from "@/src/data/schema"
+import { comments, opinions, userGames } from "@/src/data/schema"
 import { and, eq } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
 import { headers } from "next/headers"
@@ -49,6 +49,23 @@ export const removeGame = async (gameId: number) => {
 
     if(!session) throw new Error("Non connecté")
 
+    // On récupère l'entrée userGames pour avoir son id
+    const userGame = await db.query.userGames.findFirst({
+    where: and(
+      eq(userGames.userId, session.user.id),
+      eq(userGames.gameId, gameId)
+    )
+    })
+
+    if (!userGame) throw new Error("Jeu non trouvé dans ta bibliothèque")
+
+    //On supprime les commentaires liés
+    await db.delete(comments).where(eq(comments.userGamesId, userGame.id))
+
+    //On supprime les opinios liées
+    await db.delete(opinions).where(eq(opinions.userGamesId, userGame.id))
+
+    //On supprime l'entrée userGames
     await db.delete(userGames).where(
         and(
             eq(userGames.userId, session.user.id),

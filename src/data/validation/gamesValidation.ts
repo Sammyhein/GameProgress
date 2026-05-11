@@ -9,3 +9,7 @@ export const addGameSchema = z.object({
 export const addCommentSchema = z.object({
     comment: z.string().min(1, "Écrivez un commentaire avant de l'ajouter")
 })
+
+export const addOpinionSchema = z.object({
+    opinion: z.string().max(100, "Votre opinion doit faire moins de 100 caractères")
+})

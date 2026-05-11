@@ -2,13 +2,15 @@
 
 import { auth } from "@/auth";
 import Header from "@/src/components/Header"
-import JournalForm from "@/src/components/JournalForm";
+import AddCommentForm from "@/src/components/AddCommentForm";
 import ModifyGameButton from "@/src/components/ModifyGameButton";
 import RemoveCommentButton from "@/src/components/RemoveCommentButton";
 import { RemoveGameButtonJournal } from "@/src/components/RemoveGameButton";
 import { db } from "@/src/data/drizzle";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
+import { AddNegativeOpinionForm, AddPositiveOpinionForm } from "@/src/components/AddOpinionForms";
+import RemoveOpinionButton from "@/src/components/RemoveOpinionButton";
 
 export default async function Journal({params}: {params: Promise<{gameName : string}>}){
 
@@ -104,26 +106,38 @@ export default async function Journal({params}: {params: Promise<{gameName : str
                         <p>{journal.comment}</p>
                     </div>
                 ))}
-                <JournalForm gameId={game.idGame}/>
+                <AddCommentForm gameId={game.idGame}/>
             </section>
 
             <section>
                 <article>
                     <h3>Ce que j'aime dans ce jeu</h3>
-                    {}
-                    <div>
-                        <input type="text" placeholder="Nouvel avis"/>
-                        <button>Ajouter</button>
-                    </div>
+                    {gameJournal.opinions.map((journal) => {
+                        if(journal.isPositive){
+                            return(
+                                <div key={journal.id}>
+                                    <p>{journal.opinion}</p>
+                                    <RemoveOpinionButton opinionId={journal.id}/>
+                                </div>
+                            )
+                        }
+                    })}
+                    <AddPositiveOpinionForm gameId={game.idGame}/>
                 </article>
 
                 <article>
                     <h3>Ce que je n'aime pas dans ce jeu</h3>
-                    {}
-                    <div>
-                        <input type="text" placeholder="Nouvel avis"/>
-                        <button>Ajouter</button>
-                    </div>
+                    {gameJournal.opinions.map((journal) => {
+                        if(!journal.isPositive){
+                            return(
+                                <div key={journal.id}>
+                                    <p>{journal.opinion}</p>
+                                    <RemoveOpinionButton opinionId={journal.id}/>
+                                </div>
+                            )
+                        }
+                    })}
+                    <AddNegativeOpinionForm gameId={game.idGame}/>
                 </article>
             </section>
 
