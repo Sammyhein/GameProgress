@@ -28,7 +28,7 @@ export default function Login(){
             </button>
 
 
-            <p>Vous n'avez pas encore de compte ? <Link href="/create-account"><span className="text-blue-300">Créer un compte</span></Link></p>
+            <p>Vous n'avez pas encore de compte ? <Link href="/create-account"><span className="text-blue-300">Créer un compte</span></Link> | <Link href="/forgot-password" className="text-blue-300">Mot de passe oublié ?</Link></p>
         </form>
         </>
     )

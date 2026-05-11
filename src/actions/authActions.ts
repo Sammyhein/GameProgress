@@ -25,6 +25,16 @@ export type SigninState = {
     globalError? : string
 }
 
+export type ForgotPasswordState = {
+    success?: boolean
+    globalError?: string
+}
+
+export type ResetPasswordState = {
+  success?: boolean
+  globalError?: string
+}
+
 export const signup = async (prevState : SignupState, formData: FormData): Promise<SignupState> => {
     const raw = {
     pseudo : formData.get("pseudo") as string,
@@ -127,3 +137,40 @@ export const signout = async () => {
     await auth.api.signOut({headers: await headers()}); // attention à bien passer les headers !
     redirect("/")
 };
+
+export const forgotPassword = async (
+    prevState: ForgotPasswordState,
+    formData: FormData
+): Promise<ForgotPasswordState> =>{
+    const email= formData.get("email") as string
+    
+    if(!email) return { globalError: "Email requis."}
+
+    await auth.api.requestPasswordReset({
+        body: {
+            email,
+            redirectTo: "/reset-password",
+        },
+    })
+
+    return {success : true}
+}
+
+export const resetPassword = async (
+    token: string,
+    prevState: ResetPasswordState,
+    formData: FormData
+): Promise<ResetPasswordState> => {
+    const password = formData.get("password") as string
+
+    if(!password || !token) return { globalError: "Données manquantes."}
+
+    const response = await auth.api.resetPassword({
+        body: { newPassword: password, token},
+        asResponse: true
+    })
+
+    if(!response.ok) return {globalError: "Lien expiré ou invalide."}
+
+    return{ success: true }
+}
