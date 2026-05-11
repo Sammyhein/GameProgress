@@ -18,6 +18,7 @@ export type SignupState = {
         password?: string[]
     }
     globalError?: string
+    success?: boolean
 }
 
 export type SigninState = {
@@ -89,10 +90,11 @@ export const signup = async (prevState : SignupState, formData: FormData): Promi
     if (!response.ok) {
         // console.error("Sign in failed:", await response.json());
         // redirect("/auth/signup?error=true");
-        return { globalError : "Une erreu est survenue, réessaie."}
+        return { globalError : "Une erreur est survenue, réessaie."}
     }
 
-    redirect("/login"); 
+    // redirect("/login"); 
+    return {success : true}
 };
 
 export const signin = async (prevState: SigninState, formData: FormData) : Promise<SigninState> => {

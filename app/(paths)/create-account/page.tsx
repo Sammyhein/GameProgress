@@ -1,12 +1,20 @@
 "use client"
 import { signup, type SignupState } from "@/src/actions/authActions"
 import Link from "next/link"
-import { useActionState } from "react"
+import { useActionState, useEffect, useRef } from "react"
 
 const initialState : SignupState = {}
 
 export default function CreateAccount(){
     const [state, formAction, isPending] = useActionState(signup, initialState)
+    const dialogRef = useRef<HTMLDialogElement>(null)
+
+    useEffect(() => {
+        if(state.success){
+            dialogRef.current?.showModal()
+        }
+    }, [state.success])
+
     return(
         <>
         <h1>LOGO</h1>
@@ -53,6 +61,26 @@ export default function CreateAccount(){
             </button>
             {/* </Link> */}
         </form>
+
+        <dialog
+            ref={dialogRef}
+            className="rounded-2xl p-6 w-80 shadow-xl backdrop:bg-black/50"
+        >
+            <article className="flex flex-col gap-4">
+                <header>
+                    <h2 className="text-lg font-bold">Compte créé ! 🎉</h2>
+                </header>
+                <section>
+                    <p>Bravo, ton compte a bien été créé. Tu peux maintenant te connecter !</p>
+                </section>
+                <footer className="flex justify-end">
+                    <Link href={"/login"} onClick={() => dialogRef.current?.close()} className="px-4 py-2 bg-green-500 text-white rounded-xl">
+                    Se connecter
+                    </Link>
+                </footer>
+            </article>
+
+        </dialog>
         </>
     )
 }
