@@ -10,14 +10,21 @@ export default function ForgotPassword(){
 
     if(state.success){
         return(
-            <p>Si cet email existe, tu recevras un lien de réinitialisation dans quelques minutes.</p>
-
+            <>
+            <h1>VÉRIFIE TES MAILS</h1>
+            <p className="flex flex-col">Si cet email existe dans notre base de donnée, 
+            tu recevras un lien de réinitialisation dans quelques minutes.
+            <br />Si ce n'est pas le cas, tu n'as peut-être pas encore de compte sur notre site <span>OU</span> tu as peut-être pas inscrit le bon mail. 
+            N'hésite pas à réessayer !</p>
+            </>
         )
     }
 
     return(
         <form action={formAction} className="flex flex-col">
             <h1>Mot de passe oublié</h1>
+            <p>Écris ton adresse mail et appuie sur le bouton.
+            Tu recevras ensuite un email avec un lien pour réinitialiser ton mot de passe !</p>
             <label htmlFor="email">Adresse email</label>
             {state.globalError && (
                 <p className="text-red-500 text-sm">{state.globalError}</p>

@@ -10,8 +10,10 @@ const initialState: ResetPasswordState = {}
 export default function ResetPassword(){
     const searchParams = useSearchParams()
     const token = searchParams.get("token") ?? ""
+    const pseudo = searchParams.get("pseudo") ?? ""
     const [state, formAction, isPending] = useActionState(resetPassword.bind(null, token), initialState)
     console.log(token)
+    
 
     if(state.success){
         return(
@@ -24,7 +26,8 @@ export default function ResetPassword(){
 
     return(
         <form action={formAction} className="flex flex-col">
-            <h1>Nouveau mot de passe</h1>
+            <h1>Bonjour {pseudo} !</h1>
+            <p>Tu es sur le point de changer de mot de passe. <br />Ne l'oublie pas cette fois-ci !</p>
             <label htmlFor="password">Nouveau mot de passe</label>
             {state.globalError && (
                 <p className="text-red-500 text-sm">{state.globalError}</p>

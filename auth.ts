@@ -11,11 +11,16 @@ export const auth = betterAuth({
     emailAndPassword: {
         enabled: true, // On active les comptes par email et mot de passe
         sendResetPassword: async({user, url}) => {
+          //On ajout le pseudo à l'URL de redirection
+          const urlObj = new URL(url)
+          const callbackURL = urlObj.searchParams.get("callbackURL") ?? "/reset-password"
+          urlObj.searchParams.set("callbackURL", `${callbackURL}?pseudo=${(user as any).pseudo}`)
+
           await resend.emails.send({
             from: "GameProgress <onboarding@resend.dev>",
             to: user.email,
             subject: "Réinitialisation de ton mot de passe",
-            html: `<p>Clique sur ce lien pour réinitialiser ton mot de passe :</p><a href="${url}">${url}</a>`,
+            html: `<p>Clique sur ce lien pour réinitialiser ton mot de passe :</p><a href="${urlObj.toString()}">${urlObj.toString()}</a>`,
           })
         }
     },
