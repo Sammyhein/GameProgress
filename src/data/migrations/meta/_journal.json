@@ -50,6 +50,27 @@
       "when": 1778245057617,
       "tag": "0006_purple_maelstrom",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1778592977830,
+      "tag": "0007_conscious_legion",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1778593220855,
+      "tag": "0008_wide_shooting_star",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1778593267112,
+      "tag": "0009_loud_whiplash",
+      "breakpoints": true
     }
   ]
 }

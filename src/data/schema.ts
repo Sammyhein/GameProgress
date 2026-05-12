@@ -13,6 +13,7 @@ export const category = pgTable("category", {
 export const gamesCategory = pgTable("games_category", {
     idCategory: integer("id_category"),
     idGame: integer("id_game"),
+    id: serial("id").primaryKey(),
 }, (table) => [
     foreignKey({
             columns: [table.idCategory],
@@ -50,6 +51,7 @@ export const platforms = pgTable("platforms", {
 export const gamesPlatforms = pgTable("games_platforms", {
     idPlatform: integer("id_platform"),
     idGame: integer("id_game"),
+    id: serial("id").primaryKey(),
 }, (table) => [
     foreignKey({
             columns: [table.idPlatform],

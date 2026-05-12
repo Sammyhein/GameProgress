@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import GameButtons from "./GameButtons"
+import Link from "next/link"
 
 export type Game = {
     idGame: number
@@ -35,8 +36,10 @@ export default function GamesList({gamesList, userGameId} : GamesListProps){
             <section>
                 {filteredGames.map((game) => (
                 <article key={game.idGame}>
+                    <Link href={`/search-game/${encodeURIComponent(game.name)}`}>
                     <img src={`${game.imageUrl}`} alt={game.name} />
                     <h2>{game.name}</h2>
+                    </Link>
                     <GameButtons
                     gameId={game.idGame}
                     gameName={game.name}
