@@ -7,3 +7,7 @@ export const signupSchema = z.object({
     email: z.email("Vous devez écrire un email valide. Ex: prenom.nom@gmail.com"),
     password: z.string().trim().min(8,"Le mot de passe doit être à un minimum de 8 caractères et ne doit pas commencer ou finir par un espace")
 })
+
+export const resetPasswordSchema = z.object({
+  password: z.string().trim().min(8, "Le mot de passe doit faire au moins 8 caractères")
+})

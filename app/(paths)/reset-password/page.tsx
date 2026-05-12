@@ -29,6 +29,9 @@ export default function ResetPassword(){
             <h1>Bonjour {pseudo} !</h1>
             <p>Tu es sur le point de changer de mot de passe. <br />Ne l'oublie pas cette fois-ci !</p>
             <label htmlFor="password">Nouveau mot de passe</label>
+            {state.errors?.password && (
+                <p className="text-red-500 text-sm">{state.errors.password[0]}</p>
+            )}
             {state.globalError && (
                 <p className="text-red-500 text-sm">{state.globalError}</p>
             )}

@@ -3,7 +3,7 @@
 import { auth } from "@/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { signupSchema } from "@/src/data/validation/authValidation";
+import { resetPasswordSchema, signupSchema } from "@/src/data/validation/authValidation";
 import { db } from "../data/drizzle";
 import { eq } from "drizzle-orm";
 import { user } from "../data/schema";
@@ -31,6 +31,9 @@ export type ForgotPasswordState = {
 }
 
 export type ResetPasswordState = {
+    errors?:{
+        password?: string[]
+    }
   success?: boolean
   globalError?: string
 }
@@ -165,8 +168,17 @@ export const resetPassword = async (
 
     if(!password || !token) return { globalError: "Données manquantes."}
 
+     //validation Zod
+    const result = resetPasswordSchema.safeParse({password})
+
+    if(!result.success){
+        return{
+            errors: result.error.flatten().fieldErrors,
+        }
+    }
+
     const response = await auth.api.resetPassword({
-        body: { newPassword: password, token},
+        body: { newPassword: result.data.password, token},
         asResponse: true
     })
 
