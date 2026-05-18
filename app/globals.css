@@ -1,4 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
 @import "tailwindcss";
+
+@theme inline {
+  /* Fonds */
+  --color-bg-primary: #12111a;
+  --color-bg-card: #1a1a2e;
+  --color-bg-elevated: #16213e;
+
+  /* Couleurs principales */
+  --color-brand-purple: #8b5cf6;
+  --color-brand-purple-dark: #6d28d9;
+  --color-brand-cyan: #00e5cc;
+
+  /* Textes */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #52525b;
+
+  /* États */
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+
+  /* Police */
+  --font-sans: "Outfit", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-bg-primary text-text-primary font-sans;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-bg-primary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brand-purple rounded-full;
+  }
+}
+
+/* @import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -23,4 +70,4 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
+} */
