@@ -76,7 +76,7 @@ export default function Home() {
               href="/create-account"
               className="bg-brand-purple hover:bg-brand-purple-dark text-white px-8 py-3 rounded-xl font-semibold transition-colors"
             >
-              Commencer gratuitement
+              S'inscrire gratuitement
             </Link>
             <Link
               href="/login"
@@ -90,7 +90,7 @@ export default function Home() {
         {/* Features */}
         <section aria-labelledby="features-title" className="px-8 py-16 max-w-5xl mx-auto">
           <h2 id="features-title" className="text-3xl font-bold text-center text-text-primary mb-12">
-            Tout ce dont tu as besoin
+            Ce que Gamer+ te permet de faire
           </h2>
           <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 list-none">
 
