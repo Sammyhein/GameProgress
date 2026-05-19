@@ -14,7 +14,7 @@ export default async function Header() {
       className="sticky top-0 z-50 flex items-center justify-between px-4 md:px-8 py-4 bg-bg-primary/90 backdrop-blur border-b border-brand-purple/20"
     >
       {/* Logo */}
-      <Link href="/" aria-label="Gamer+ - Retour à l'accueil">
+      <Link href={`/search-game`} aria-label="Gamer+ - Retour à l'accueil">
         <img
           src="/Gamer+_Logo_Logo.png"
           alt="Gamer+"

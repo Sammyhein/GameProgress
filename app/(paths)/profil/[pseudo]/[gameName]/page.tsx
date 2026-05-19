@@ -66,6 +66,7 @@ export default async function Journal({ params }: { params: Promise<{ gameName: 
         <section aria-labelledby="game-title" className="flex flex-col gap-6">
 
         {/* Grande image en haut */}
+        <Link href={`/search-game/${encodeURIComponent(gameJournal.game.name)}`}>
         <div className="relative w-full h-48 md:h-72 rounded-2xl overflow-hidden">
             <img
             src={`${gameJournal.game.imageUrl}`}
@@ -85,6 +86,7 @@ export default async function Journal({ params }: { params: Promise<{ gameName: 
             {gameJournal.game.name}
             </h1>
         </div>
+        </Link>
 
         {/* Stats + actions en dessous */}
         <div className="flex flex-col gap-4">

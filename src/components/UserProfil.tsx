@@ -98,13 +98,13 @@ export default function UserProfil({ userGamesList, pseudo }: UserProfilProps) {
                         href={`/search-game/${encodeURIComponent(entry.game.name)}`}
                         className="flex-1 py-2 border border-brand-purple/30 hover:border-brand-purple hover:bg-brand-purple/10 text-brand-purple text-xs font-semibold rounded-xl transition-colors text-center"
                         >
-                        Description
+                        Voir le Jeu 
                         </Link>
                         <Link
                         href={`/profil/${pseudo}/${encodeURIComponent(entry.game.name)}`}
                         className="flex-1 py-2 border border-brand-cyan/30 hover:border-brand-cyan hover:bg-brand-cyan/10 text-brand-cyan text-xs font-semibold rounded-xl transition-colors text-center"
                         >
-                        Journal
+                        Voir mon Journal
                         </Link>
                     </div>
                     <RemoveGameButton
