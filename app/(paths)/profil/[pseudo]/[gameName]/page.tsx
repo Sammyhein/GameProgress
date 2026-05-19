@@ -74,7 +74,7 @@ export default async function Journal({ params }: { params: Promise<{ gameName: 
             />
             {/* Overlay gradient en bas pour faire transition avec le fond */}
             <div
-            className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/30 to-transparent"
+            className="absolute inset-0 bg-linear-to-t from-bg-primary via-bg-primary/30 to-transparent"
             aria-hidden="true"
             />
             {/* Titre positionné sur l'image en bas à gauche */}
