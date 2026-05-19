@@ -5,6 +5,7 @@ import { auth } from "@/auth";
 import { db } from "@/src/data/drizzle"
 import { headers } from "next/headers";
 import GamesList from "@/src/components/GamesList";
+import Footer from "@/src/components/Footer";
 
 export default async function SearchGame(){
   //On récupère tous les jeux
@@ -37,10 +38,13 @@ export default async function SearchGame(){
   console.log(session)
     return(
         <>
-        <Header/>
-        <main>
-          <GamesList gamesList={gamesList} userGameId={userGameId}/>
-        </main>
+        <div className="min-h-screen bg-bg-primary flex flex-col">
+          <Header/>
+          <main className="flex-1">
+            <GamesList gamesList={gamesList} userGameId={userGameId}/>
+          </main>
+          <Footer/>
+        </div>
         </>
     )
 }

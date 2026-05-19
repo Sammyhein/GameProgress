@@ -1,40 +1,93 @@
 "use client"
-
 import { useState } from "react"
 import AddGameModal from "./AddGameModal"
 import RemoveGameModal from "./RemoveGameModal"
 
+export default function GameButtons({ gameId, gameName, isAdded }: {
+  gameId: number
+  gameName: string
+  isAdded: boolean
+}) {
+  const [showAddModal, setShowAddModal] = useState(false)
+  const [showRemoveModal, setShowRemoveModal] = useState(false)
 
-type GameButtonsProps = {
-    gameId: number
-    gameName: string
-    isAdded: boolean
+  return (
+    <>
+      {!isAdded ? (
+        <button
+          onClick={() => setShowAddModal(true)}
+          aria-label={`Ajouter ${gameName} à ma bibliothèque`}
+          className="w-8 h-8 bg-brand-cyan hover:bg-brand-cyan/80 text-bg-primary font-bold rounded-full flex items-center justify-center text-lg transition-colors shadow-lg"
+        >
+          +
+        </button>
+      ) : (
+        <button
+          onClick={() => setShowRemoveModal(true)}
+          aria-label={`Retirer ${gameName} de ma bibliothèque`}
+          className="w-8 h-8 bg-brand-purple hover:bg-brand-purple-dark text-white font-bold rounded-full flex items-center justify-center text-lg transition-colors shadow-lg"
+        >
+          ✓
+        </button>
+      )}
+
+      {showAddModal && (
+        <AddGameModal
+          gameId={gameId}
+          gameName={gameName}
+          onClose={() => setShowAddModal(false)}
+        />
+      )}
+
+      {showRemoveModal && (
+        <RemoveGameModal
+          gameId={gameId}
+          gameName={gameName}
+          onClose={() => setShowRemoveModal(false)}
+        />
+      )}
+    </>
+  )
 }
 
-export default function GameButtons({ gameId, gameName, isAdded} : GameButtonsProps){
-    const [showAddModal, setShowAddModal]= useState(false)
-    const [showRemoveModal, setShowRemoveModal] = useState(false)
+//Version with no design
+// "use client"
 
-    return (
-        <>
-            {!isAdded ? (
-                <button onClick={() => setShowAddModal(true)} className="p-2 bg-green-500 border-2 border-white rounded-2xl">
-                    +
-                </button>
-            ) : (
-                <button onClick={() => setShowRemoveModal(true)} className="p-2 bg-red-500 border-2 border-white rounded-2xl">
-                    -
-                </button>
-            )}
+// import { useState } from "react"
+// import AddGameModal from "./AddGameModal"
+// import RemoveGameModal from "./RemoveGameModal"
 
-            {showAddModal && (
-                <AddGameModal gameId={gameId} gameName={gameName} onClose={() => setShowAddModal(false)}/>
-            )}
 
-            {showRemoveModal && (
-                <RemoveGameModal gameId={gameId} gameName={gameName} onClose={() => setShowRemoveModal(false)}/>
-            )}
-        </>
-    )
-}
+// type GameButtonsProps = {
+//     gameId: number
+//     gameName: string
+//     isAdded: boolean
+// }
+
+// export default function GameButtons({ gameId, gameName, isAdded} : GameButtonsProps){
+//     const [showAddModal, setShowAddModal]= useState(false)
+//     const [showRemoveModal, setShowRemoveModal] = useState(false)
+
+//     return (
+//         <>
+//             {!isAdded ? (
+//                 <button onClick={() => setShowAddModal(true)} className="p-2 bg-green-500 border-2 border-white rounded-2xl">
+//                     +
+//                 </button>
+//             ) : (
+//                 <button onClick={() => setShowRemoveModal(true)} className="p-2 bg-red-500 border-2 border-white rounded-2xl">
+//                     -
+//                 </button>
+//             )}
+
+//             {showAddModal && (
+//                 <AddGameModal gameId={gameId} gameName={gameName} onClose={() => setShowAddModal(false)}/>
+//             )}
+
+//             {showRemoveModal && (
+//                 <RemoveGameModal gameId={gameId} gameName={gameName} onClose={() => setShowRemoveModal(false)}/>
+//             )}
+//         </>
+//     )
+// }
 

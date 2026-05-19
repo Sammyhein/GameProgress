@@ -189,6 +189,7 @@ export default function CreateAccount() {
   )
 }
 
+//Version with no design
 // "use client"
 // import { signup, type SignupState } from "@/src/actions/authActions"
 // import Link from "next/link"
