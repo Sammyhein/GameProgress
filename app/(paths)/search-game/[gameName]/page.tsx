@@ -1,5 +1,7 @@
+import Footer from "@/src/components/Footer"
 import Header from "@/src/components/Header"
 import { db } from "@/src/data/drizzle"
+import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
@@ -57,11 +59,15 @@ export default async function GameDescription({ params }: { params: Promise<{ ga
 
           {/* Image */}
           <section aria-label="Pochette du jeu" className="w-full md:w-64 shrink-0">
-            <img
+            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-lg">
+            <Image
               src={`${game.imageUrl}`}
               alt={`Pochette de ${game.name}`}
-              className="w-full rounded-2xl object-cover shadow-lg"
+              fill
+              sizes="(max-width: 768px) 100vw, 256px"
+              className="object-cover"
             />
+            </div>
           </section>
 
           {/* Infos */}
@@ -159,6 +165,7 @@ export default async function GameDescription({ params }: { params: Promise<{ ga
         </article>
 
       </main>
+      <Footer/>
     </div>
   )
 }

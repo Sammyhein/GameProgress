@@ -12,7 +12,8 @@ export default async function Profil({ params }: { params: Promise<{ pseudo: str
 
   const userGamesList = await db.query.userGames.findMany({
     with: { game: true },
-    where: (userGames, { eq }) => eq(userGames.userId, session!.user.id)
+    where: (userGames, { eq }) => eq(userGames.userId, session!.user.id),
+    orderBy: (userGames, { desc }) => [desc(userGames.id)]
   })
 
   return (

@@ -15,6 +15,9 @@ const eslintConfig = defineConfig([
   ]),
   {
     rules: {
+    // Next veut que tu remplace les apostrophes pas des &apos, on desactive cette regles pour éviter ce genre d'affichage d'erreur 
+    "react/no-unescaped-entities": "off",
+    
     // Interdit les variables déclarées mais jamais utilisées
     "no-unused-vars" : "warn",
 

@@ -1,4 +1,4 @@
-import {describe, it, test, expect} from "vitest"
+import {describe, test, expect} from "vitest"
 import { signupSchema } from "./authValidation"
 
 //'it' apparement est plus utilisé au lieu de 'test' quand on fait un describe

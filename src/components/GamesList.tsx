@@ -2,6 +2,7 @@
 import { useState } from "react"
 import GameButtons from "./GameButtons"
 import Link from "next/link"
+import Image from "next/image"
 
 export type Game = {
   idGame: number
@@ -88,11 +89,14 @@ export default function GamesList({ gamesList, userGameId }: GamesListProps) {
                         href={`/search-game/${encodeURIComponent(game.name)}`}
                         aria-label={`Voir la description de ${game.name}`}
                         >
-                        <div className="aspect-video overflow-hidden">
-                            <img
+                        <div className="relative aspect-video overflow-hidden">
+                            <Image
                             src={`${game.imageUrl}`}
                             alt={game.name}
-                            className="w-full h-full object-cover"
+                            fill
+                            loading="eager"
+                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                            className=" object-cover"
                             />
                         </div>
                         </Link>

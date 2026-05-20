@@ -1,7 +1,7 @@
 import { auth } from "@/auth"
 import { headers } from "next/headers"
 import Link from "next/link"
-import SignoutButton from "./SignoutButton"
+import Image from "next/image"
 
 export default async function Footer() {
     const session = await auth.api.getSession({ headers: await headers() })
@@ -14,10 +14,12 @@ export default async function Footer() {
 
         {/* Logo */}
         <Link href="/" aria-label="Gamer+ - Retour à l'accueil">
-          <img
+          <Image
             src="/Gamer+_Logo_Logo.png"
             alt="Gamer+"
-            className="h-6 w-auto"
+            height={24}
+            width={60}
+            className="w-auto"
           />
         </Link>
 
@@ -45,9 +47,6 @@ export default async function Footer() {
               Profil
             </Link>
             </li>
-            {/* <li>
-              <SignoutButton />
-            </li> */}
           </ul>
         </nav>
 

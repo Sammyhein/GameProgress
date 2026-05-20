@@ -15,10 +15,12 @@ export default async function Header() {
     >
       {/* Logo */}
       <Link href={`/search-game`} aria-label="Gamer+ - Retour à l'accueil">
-        <img
+        <Image
           src="/Gamer+_Logo_Logo.png"
           alt="Gamer+"
-          className="h-7 md:h-8 w-auto"
+          height={28}
+          width={100}
+          className="md:h-8 w-auto"
         />
       </Link>
 

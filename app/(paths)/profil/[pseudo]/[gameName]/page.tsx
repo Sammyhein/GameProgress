@@ -13,6 +13,7 @@ import RemoveOpinionButton from "@/src/components/RemoveOpinionButton"
 import { RemoveGameButtonJournal } from "@/src/components/RemoveGameButton"
 import Footer from "@/src/components/Footer"
 import Link from "next/link"
+import Image from "next/image"
 
 export default async function Journal({ params }: { params: Promise<{ gameName: string }> }) {
   const { gameName } = await params
@@ -68,10 +69,12 @@ export default async function Journal({ params }: { params: Promise<{ gameName: 
         {/* Grande image en haut */}
         <Link href={`/search-game/${encodeURIComponent(gameJournal.game.name)}`}>
         <div className="relative w-full h-48 md:h-72 rounded-2xl overflow-hidden">
-            <img
+            <Image
             src={`${gameJournal.game.imageUrl}`}
             alt={`Pochette de ${gameJournal.game.name}`}
-            className="w-full h-full object-cover"
+            fill
+            sizes="100vw"
+            className="object-cover"
             />
             {/* Overlay gradient en bas pour faire transition avec le fond */}
             <div

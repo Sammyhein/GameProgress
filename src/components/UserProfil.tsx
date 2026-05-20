@@ -3,6 +3,7 @@ import { useState } from "react"
 import { UserGameWithGame } from "../interfaces/types"
 import RemoveGameButton from "./RemoveGameButton"
 import Link from "next/link"
+import Image from "next/image"
 
 type UserProfilProps = {
   userGamesList: UserGameWithGame[]
@@ -50,28 +51,31 @@ export default function UserProfil({ userGamesList, pseudo }: UserProfilProps) {
               <Link
                 href={`/profil/${pseudo}/${encodeURIComponent(entry.game.name)}`}
                 aria-label={`Voir le journal de ${entry.game.name}`}
-                className="relative"
               >
-                <div className="aspect-square overflow-hidden">
-                  <img
+                <div className="relative aspect-square overflow-hidden">
+                  <Image
                     src={`${entry.game.imageUrl}`}
                     alt={`Pochette de ${entry.game.name}`}
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    loading="eager"
+                    className="object-cover"
                   />
-                </div>
+                
 
-                {/* Overlay progression */}
-                <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-bg-primary/90 to-transparent px-3 py-2">
-                  <div className="w-full bg-bg-elevated rounded-full h-1.5">
-                    <div
-                      className="bg-brand-cyan h-1.5 rounded-full transition-all"
-                      style={{ width: `${entry.progress}%` }}
-                      role="progressbar"
-                      aria-valuenow={entry.progress}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      aria-label={`Progression : ${entry.progress}%`}
-                    />
+                  {/* Overlay progression */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-bg-primary/90 to-transparent px-3 py-2">
+                    <div className="w-full bg-bg-elevated rounded-full h-1.5">
+                      <div
+                        className="bg-brand-cyan h-1.5 rounded-full transition-all"
+                        style={{ width: `${entry.progress}%` }}
+                        role="progressbar"
+                        aria-valuenow={entry.progress}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        aria-label={`Progression : ${entry.progress}%`}
+                      />
+                    </div>
                   </div>
                 </div>
               </Link>

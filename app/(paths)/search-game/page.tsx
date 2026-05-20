@@ -34,8 +34,6 @@ export default async function SearchGame(){
   // On crée un tableau des id des jeux déjà ajoutés
   const userGameId = userGamesList.map(userG => userG.gameId)
 
-  console.log(gamesList)
-  console.log(session)
     return(
         <>
         <div className="min-h-screen bg-bg-primary flex flex-col">

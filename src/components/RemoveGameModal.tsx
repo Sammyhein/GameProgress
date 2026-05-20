@@ -100,6 +100,14 @@ export function RemoveGameModalJournal({ gameId, gameName, onClose, pseudo }: Re
     if (e.target === dialogRef.current) handleClose()
   }
 
+  const handleConfirm = async () => {
+    setIsPending(true)
+    await removeGame(gameId)  // ← supprime vraiment le jeu
+    setIsPending(false)
+    handleClose()
+    
+  }
+
   return (
     <dialog
       ref={dialogRef}
@@ -128,14 +136,13 @@ export function RemoveGameModalJournal({ gameId, gameName, onClose, pseudo }: Re
           >
             Annuler
           </button>
-          <Link href={`/profil/${pseudo}`}>
-            <button
-              disabled={isPending}
-              aria-busy={isPending}
-              className="px-4 py-2 bg-error hover:bg-error/80 disabled:opacity-50 text-white font-semibold rounded-xl text-sm transition-colors"
-            >
+          <Link href={`/profil/${pseudo}`}
+                onClick={handleConfirm}
+                aria-disabled={isPending}
+                className="px-4 py-2 bg-error hover:bg-error/80 disabled:opacity-50 text-white font-semibold rounded-xl text-sm transition-colors">
+            
               {isPending ? "Suppression..." : "Supprimer"}
-            </button>
+            
           </Link>
         </footer>
       </article>

@@ -1,6 +1,6 @@
 import { pgTable, serial, text, foreignKey, integer, boolean, timestamp, index, varchar } from "drizzle-orm/pg-core"
-import { sql , relations} from "drizzle-orm"
-import { positive } from "zod";
+import { relations} from "drizzle-orm"
+// import { positive } from "zod";
 
 //---------------------------TABLES---------------------------
 
