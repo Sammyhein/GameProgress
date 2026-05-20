@@ -1,6 +1,9 @@
+import { auth } from "@/auth"
 import Footer from "@/src/components/Footer"
+import GameButtons from "@/src/components/GameButtons"
 import Header from "@/src/components/Header"
 import { db } from "@/src/data/drizzle"
+import { headers } from "next/headers"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -8,6 +11,9 @@ import { notFound } from "next/navigation"
 export default async function GameDescription({ params }: { params: Promise<{ gameName: string }> }) {
   const { gameName } = await params
   const decodeName = decodeURIComponent(gameName)
+
+  // Récupère la session et les jeux du user
+  const session = await auth.api.getSession({ headers: await headers() })
 
   const game = await db.query.games.findFirst({
     with: {
@@ -18,6 +24,13 @@ export default async function GameDescription({ params }: { params: Promise<{ ga
   })
 
   if (!game) return notFound()
+
+  // Récupère les jeux du user pour savoir si ce jeu est déjà ajouté
+  const userGamesList = await db.query.userGames.findMany({
+    where: (userGames, { eq }) => eq(userGames.userId, session!.user.id)
+  })
+
+  const userGameId = userGamesList.map(ug => ug.gameId)
 
   return (
     <div className="min-h-screen bg-bg-primary flex flex-col">
@@ -35,10 +48,23 @@ export default async function GameDescription({ params }: { params: Promise<{ ga
           </Link>
         </nav>
 
-        {/* Titre */}
-        <h1 className="text-3xl md:text-5xl font-bold text-text-primary uppercase mb-8 tracking-wide">
-          {game.name}
-        </h1>
+          <section className="flex flex-wrap gap-3 items-center mb-2">
+          <p className="text-text-secondary text-xs font-semibold uppercase tracking-wider">
+            Ajouter / Supprimer de la bibliothèque : 
+          </p>
+          <GameButtons
+            gameId={game.idGame}
+            gameName={game.name}
+            isAdded={userGameId.includes(game.idGame)}
+            add="+"
+            remove="X"/>
+          </section>
+        
+          {/* Titre */}
+          <h1 className="text-3xl md:text-5xl font-bold text-text-primary uppercase mb-8 tracking-wide">
+            {game.name}
+          </h1>
+
 
         {/* Vidéo */}
         {game.videoUrl && (
@@ -73,6 +99,7 @@ export default async function GameDescription({ params }: { params: Promise<{ ga
           {/* Infos */}
           <section className="flex flex-col gap-5 flex-1">
 
+          
             {/* Tags éditeur + gratuit */}
             <div className="flex flex-wrap gap-2">
               {game.companyName && (
@@ -91,6 +118,7 @@ export default async function GameDescription({ params }: { params: Promise<{ ga
                 </span>
               )}
             </div>
+
 
             {/* Genres */}
             {game.gamesCategories.length > 0 && (

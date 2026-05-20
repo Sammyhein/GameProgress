@@ -81,7 +81,7 @@ export default function GamesList({ gamesList, userGameId }: GamesListProps) {
           <ul className="grid grid-cols sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 list-none">
             {filteredGames.map((game) => (
               <li key={game.idGame}>
-                <article className="bg-bg-card border border-brand-purple/20 rounded-2xl overflow-hidden flex flex-col hover:border-brand-purple/50 transition-colors">
+                <article className="bg-bg-card border border-brand-purple/20 rounded-2xl overflow-hidden flex flex-col hover:border-brand-purple/50 hover:bg-brand-purple-dark/20 transition-colors">
   
                     {/* Image + bouton superposé */}
                     <div className="relative">
@@ -107,6 +107,8 @@ export default function GamesList({ gamesList, userGameId }: GamesListProps) {
                             gameId={game.idGame}
                             gameName={game.name}
                             isAdded={userGameId.includes(game.idGame)}
+                            add="+"
+                            remove="✓"
                         />
                         </div>
                     </div>
