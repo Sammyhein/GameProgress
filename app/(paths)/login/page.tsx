@@ -1,5 +1,6 @@
 "use client"
 import { signin, type SigninState } from "@/src/actions/authActions"
+import Image from "next/image"
 import Link from "next/link"
 import { useActionState } from "react"
 
@@ -15,9 +16,11 @@ export default function Login() {
         {/* Logo */}
         <header className="text-center mb-8">
           <Link href="/" aria-label="Gamer+ - Retour à l'accueil">
-            <img
+            <Image
               src="/Gamer+_Logo_Logo.png"
               alt="Gamer+"
+              height={40}
+              width={200}
               className="h-10 w-auto mx-auto"
             />
           </Link>

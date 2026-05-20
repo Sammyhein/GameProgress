@@ -18,6 +18,7 @@
 //   );
 // }
 
+import Image from "next/image"
 import Link from "next/link"
 
 export default function Home() {
@@ -27,10 +28,12 @@ export default function Home() {
       {/* Header public */}
       <header role="banner" className="flex items-center justify-between px-4 md:px-8 py-4 border-b border-brand-purple/20">
         <Link href="/" aria-label="Gamer+ - Retour à l'accueil">
-          <img
+          <Image
             src="/Gamer+_Logo_Logo.png"
             alt="Gamer+"
-            className="h-7 md:h-8 w-auto"
+            height={28}
+            width={200}
+            className="md:h-8 w-auto"
           />
         </Link>
 
@@ -155,9 +158,11 @@ export default function Home() {
       <footer role="contentinfo" className="border-t border-brand-purple/20 px-8 py-8 mt-8">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <Link href="/" aria-label="Gamer+ - Retour à l'accueil">
-            <img
+            <Image
               src="/Gamer+_Logo_Logo.png"
               alt="Gamer+"
+              height={24}
+              width={200}
               className="h-6 w-auto"
             />
           </Link>

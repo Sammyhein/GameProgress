@@ -13,6 +13,21 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    rules: {
+    // Interdit les variables déclarées mais jamais utilisées
+    "no-unused-vars" : "warn",
+
+    // Interdit les consols.log oubliées (warn pour pas bloquer le CI)
+    "no-console": "warn",
+
+    //POur interdir les == au lieu de ===
+    "eqeqeq": "error",
+
+    // Interdir le any en TypeScript
+    "@typescript-eslint/no-explicit-any" : "warn"
+    }
+  }
 ]);
 
 export default eslintConfig;

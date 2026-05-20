@@ -1,13 +1,32 @@
-name: learn-github-actions
+name: CI - Gamer+
 run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push]
+on:
+  push:
+    branches: ["main", "dev"]
+  pull_request:
+    branches: ["main"]
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Installation de Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: "22.20.0"
-      - run: npm install
-      - run: npm run test
+          node-version: "22"
+          cache: "npm"
+
+      - name: Installation des dépendances
+        run: npm ci
+      # - run: npm install
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build Next.js
+        run: npm run build
+
+      - name: Tests Vitest
+        run: npm run test

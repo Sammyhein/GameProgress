@@ -1,5 +1,6 @@
 "use client"
 import { signup, type SignupState } from "@/src/actions/authActions"
+import Image from "next/image"
 import Link from "next/link"
 import { useActionState, useEffect, useRef } from "react"
 
@@ -22,10 +23,12 @@ export default function CreateAccount() {
         {/* Logo */}
         <header className="text-center mb-8">
           <Link href="/" aria-label="Gamer+ - Retour à l'accueil">
-            <img
+            <Image
               src="/Gamer+_Logo_Logo.png"
               alt="Gamer+"
-              className="h-10 w-auto mx-auto"
+              width={200}
+              height={40}
+              className="w-auto mx-auto"
             />
           </Link>
         </header>
