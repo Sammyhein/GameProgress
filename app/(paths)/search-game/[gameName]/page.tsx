@@ -49,15 +49,15 @@ export default async function GameDescription({ params }: { params: Promise<{ ga
         </nav>
 
           <section className="flex flex-wrap gap-3 items-center mb-2">
-          <p className="text-text-secondary text-xs font-semibold uppercase tracking-wider">
+          {/* <p className="text-text-secondary text-xs font-semibold uppercase tracking-wider">
             Ajouter / Supprimer de la bibliothèque : 
-          </p>
+          </p> */}
           <GameButtons
             gameId={game.idGame}
             gameName={game.name}
             isAdded={userGameId.includes(game.idGame)}
-            add="+"
-            remove="X"/>
+            add="+ Ajouter à votre bibliothèque"
+            remove="- Supprimer de votre bibliothèque"/>
           </section>
         
           {/* Titre */}

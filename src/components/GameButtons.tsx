@@ -19,7 +19,7 @@ export default function GameButtons({ gameId, gameName, isAdded, add, remove }: 
         <button
           onClick={() => setShowAddModal(true)}
           aria-label={`Ajouter ${gameName} à ma bibliothèque`}
-          className="w-8 h-8 bg-brand-cyan hover:bg-brand-cyan/80 hover:text-white text-brand-purple-dark font-bold rounded-xl flex items-center justify-center text-lg transition-colors shadow-md shadow-brand-cyan-dark "
+          className="min-w-8 min-h-8 p-1 bg-brand-cyan hover:bg-brand-cyan/80 hover:text-white text-brand-purple-dark font-bold rounded-xl flex items-center justify-center text-lg transition-colors shadow-md shadow-brand-cyan-dark "
         >
           {add}
         </button>
@@ -27,7 +27,7 @@ export default function GameButtons({ gameId, gameName, isAdded, add, remove }: 
         <button
           onClick={() => setShowRemoveModal(true)}
           aria-label={`Retirer ${gameName} de ma bibliothèque`}
-          className="w-8 h-8 bg-brand-purple hover:bg-brand-purple-dark/80 hover:text-white text-brand-cyan font-bold rounded-xl flex items-center justify-center text-lg transition-colors shadow-md shadow-brand-purple-dark "
+          className="min-w-8 min-h-8 p-1 bg-brand-purple hover:bg-brand-purple-dark/80 hover:text-white text-brand-cyan font-bold rounded-xl flex items-center justify-center text-lg transition-colors shadow-md shadow-brand-purple-dark "
         >
           {remove}
         </button>
