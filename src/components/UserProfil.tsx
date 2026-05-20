@@ -59,6 +59,7 @@ export default function UserProfil({ userGamesList, pseudo }: UserProfilProps) {
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     loading="eager"
+                    quality={90}
                     className="object-cover"
                   />
                 

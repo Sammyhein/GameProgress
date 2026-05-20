@@ -18,8 +18,8 @@ export default async function Footer() {
             src="/Gamer+_Logo_Logo.png"
             alt="Gamer+"
             height={24}
-            width={60}
-            className="w-auto"
+            width={50}
+            className="h-6 w-auto"
           />
         </Link>
 
