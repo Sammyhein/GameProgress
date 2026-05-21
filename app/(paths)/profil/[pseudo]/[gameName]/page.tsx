@@ -147,7 +147,7 @@ export default async function Journal({ params }: { params: Promise<{ gameName: 
         </section>
 
         {/* Journal de progression */}
-        <section aria-labelledby="journal-title" className="flex flex-col gap-4">
+        <section aria-labelledby="journal-title" className="flex flex-col gap-4 border border-brand-purple/20 rounded-2xl p-4 hover:inset-shadow-sm hover:inset-shadow-brand-purple-dark">
           <h2 id="journal-title" className="text-xl font-bold text-text-primary">
             📓 Journal de progression
           </h2>
@@ -156,7 +156,7 @@ export default async function Journal({ params }: { params: Promise<{ gameName: 
             <p className="text-text-muted text-sm">Aucune entrée pour le moment.</p>
           )}
 
-          <ul className="flex flex-col gap-3 list-none">
+          <ul className="flex flex-col gap-3 list-none overflow-auto scrollbar-thin max-h-60 p-4">
             {gameJournal.comments.map((journal) => (
               <li key={journal.id}>
                 <article className="bg-bg-card border border-brand-purple/20 rounded-2xl px-4 py-4 flex flex-col gap-2">
@@ -170,7 +170,7 @@ export default async function Journal({ params }: { params: Promise<{ gameName: 
                     </time>
                     <RemoveCommentButton commentId={journal.id} />
                   </header>
-                  <p className="text-text-primary text-sm leading-relaxed max-h-50 scrollbar-thin overflow-auto">
+                  <p className="text-text-primary text-sm leading-relaxed max-h-48 scrollbar-thin overflow-auto">
                     {journal.comment}
                   </p>
                 </article>
@@ -182,7 +182,7 @@ export default async function Journal({ params }: { params: Promise<{ gameName: 
         </section>
 
         {/* Opinions */}
-        <section aria-labelledby="opinions-title" className="flex flex-col gap-4">
+        <section aria-labelledby="opinions-title" className="flex flex-col gap-4 border border-brand-purple/20 rounded-2xl p-4 hover:inset-shadow-sm hover:inset-shadow-brand-purple-dark">
           <h2 id="opinions-title" className="text-xl font-bold text-text-primary">
             💬 Avis sur le jeu
           </h2>
