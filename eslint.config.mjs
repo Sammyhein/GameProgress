@@ -28,7 +28,12 @@ const eslintConfig = defineConfig([
     "eqeqeq": "error",
 
     // Interdir le any en TypeScript
-    "@typescript-eslint/no-explicit-any" : "warn"
+    "@typescript-eslint/no-explicit-any" : "warn",
+    
+    // Règle pour React
+    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/set-state-in-effect": "warn",
     }
   }
 ]);
