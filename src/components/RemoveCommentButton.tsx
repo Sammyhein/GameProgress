@@ -10,7 +10,7 @@ export default function RemoveCommentButton({ commentId }: { commentId: number }
       <button
         onClick={() => setShowRemoveModal(true)}
         aria-label="Supprimer ce commentaire"
-        className="text-text-muted hover:text-error transition-colors text-xs px-2 py-1 rounded-lg hover:bg-error/10"
+        className="text-brand-cyan hover:text-error transition-colors text-xs px-2 py-1 rounded-lg hover:bg-error/10"
       >
         ✕
       </button>

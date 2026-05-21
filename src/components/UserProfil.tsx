@@ -59,7 +59,7 @@ export default function UserProfil({ userGamesList, pseudo }: UserProfilProps) {
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     loading="eager"
-                    quality={90}
+                    // quality={90}
                     className="object-cover"
                   />
                 
@@ -90,11 +90,11 @@ export default function UserProfil({ userGamesList, pseudo }: UserProfilProps) {
                 <div className="flex items-center justify-between text-xs text-text-secondary">
                   <span>{entry.progress}%</span>
                   <span>{entry.playedTime}h jouées</span>
-                  {entry.scale !== null && (
+                  {entry.scale !== 0 ? (
                     <span className="text-brand-cyan font-semibold">
                       ⭐ {entry.scale}/10
                     </span>
-                  )}
+                  ) : (<span>Non noté</span>)}
                 </div>
                 
                 <div className="flex flex-col gap-2">

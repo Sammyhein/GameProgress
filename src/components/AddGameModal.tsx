@@ -105,10 +105,13 @@ export default function AddGameModal({ gameId, gameName, onClose }: AddGameModal
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="scale" className="text-text-secondary text-sm font-medium">
-              Note (/10)
-              <span className="text-text-muted text-xs ml-1">(optionnel)</span>
-            </label>
+            <section className="flex flex-col gap-1">
+              <label htmlFor="scale" className="text-text-secondary text-sm font-medium">
+                Note (/10)
+                <span className="text-text-muted text-xs ml-1">(optionnel)</span>
+              </label>
+              <span className="text-text-muted text-xs ml-1 font-bold">À savoir : La note minimum est de 1. Toutes notes égales à 0 seront considérés comme "Non noté"</span>
+            </section>
             {errors.scale && (
               <p role="alert" className="text-error text-xs">{errors.scale[0]}</p>
             )}
