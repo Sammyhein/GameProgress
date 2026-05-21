@@ -20,6 +20,7 @@ export type AddOpinionState={
         opinion?:string[]
     }
     globalError?: string
+    success?: boolean
 }
 
 //----------COMMENTS ACTIONS---------- 
@@ -103,7 +104,7 @@ export const addPositiveOpinion =  async(gameId: number, currentPath : string , 
     })
 
     revalidatePath(currentPath)
-    return{}
+    return{ success : true}
 } 
 
 export const addNegativeOpinion =  async(gameId: number, currentPath : string , prevState: AddOpinionState, formData: FormData): Promise<AddOpinionState> =>{
@@ -138,7 +139,7 @@ export const addNegativeOpinion =  async(gameId: number, currentPath : string , 
     })
 
     revalidatePath(currentPath)
-    return{}
+    return{ success : true }
 } 
 
 export const removeOpinion = async(opinionId : number, currentPath: string) => {

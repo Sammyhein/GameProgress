@@ -170,7 +170,7 @@ export default async function Journal({ params }: { params: Promise<{ gameName: 
                     </time>
                     <RemoveCommentButton commentId={journal.id} />
                   </header>
-                  <p className="text-text-primary text-sm leading-relaxed">
+                  <p className="text-text-primary text-sm leading-relaxed max-h-50 scrollbar-thin overflow-auto">
                     {journal.comment}
                   </p>
                 </article>
@@ -203,7 +203,7 @@ export default async function Journal({ params }: { params: Promise<{ gameName: 
               <ul className="flex flex-col gap-2 list-none">
                 {positiveOpinions.map((opinion) => (
                   <li key={opinion.id} className="flex items-start justify-between gap-2 bg-success/5 border border-success/10 rounded-xl px-3 py-2">
-                    <p className="text-text-primary text-sm flex-1">{opinion.opinion}</p>
+                    <p className="text-text-primary text-sm flex-1 overflow-auto">{opinion.opinion}</p>
                     <RemoveOpinionButton opinionId={opinion.id} />
                   </li>
                 ))}
@@ -226,7 +226,7 @@ export default async function Journal({ params }: { params: Promise<{ gameName: 
               <ul className="flex flex-col gap-2 list-none">
                 {negativeOpinions.map((opinion) => (
                   <li key={opinion.id} className="flex items-start justify-between gap-2 bg-error/5 border border-error/10 rounded-xl px-3 py-2">
-                    <p className="text-text-primary text-sm flex-1">{opinion.opinion}</p>
+                    <p className="text-text-primary text-sm flex-1 overflow-auto">{opinion.opinion}</p>
                     <RemoveOpinionButton opinionId={opinion.id} />
                   </li>
                 ))}
