@@ -1,11 +1,8 @@
 "use client"
-import { resetPassword, type ResetPasswordState } from "@/src/actions/authActions"
 import Image from "next/image"
 import Link from "next/link"
 import { Suspense } from "react"
 import ResetPasswordContent from "@/src/components/ResetPasswordContent"
-
-const initialState: ResetPasswordState = {}
 
 export default function ResetPassword() {
 

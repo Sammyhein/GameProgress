@@ -1,13 +1,13 @@
 "use server"
 import Link from "next/link"
-import SignoutButton from "./SignoutButton"
 import { auth } from "@/auth"
 import { headers } from "next/headers"
 import Image from "next/image"
+import NavLinks from "./Navlinks"
 
 export default async function Header() {
   const session = await auth.api.getSession({ headers: await headers() })
-
+  
   return (
     <header
       role="banner"
@@ -26,28 +26,9 @@ export default async function Header() {
 
       {/* Navigation */}
       <nav aria-label="Navigation utilisateur">
-        <ul className="flex items-center gap-3 md:gap-6 list-none">
-          <li>
-            <Link
-              href="/search-game"
-              className="text-text-secondary hover:text-text-primary transition-colors text-sm md:text-base whitespace-nowrap"
-            >
-              Rechercher
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={`/profil/${session?.user.pseudo}`}
-              className="text-text-secondary hover:text-text-primary transition-colors text-sm md:text-base whitespace-nowrap"
-            >
-              Profil
-            </Link>
-          </li>
-          <li>
-            <SignoutButton />
-          </li>
-        </ul>
+        <NavLinks pseudo={session?.user.pseudo ?? ""}/>
       </nav>
+      
     </header>
   )
 }
