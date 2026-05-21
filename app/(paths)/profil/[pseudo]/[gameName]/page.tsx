@@ -156,7 +156,7 @@ export default async function Journal({ params }: { params: Promise<{ gameName: 
             <p className="text-text-muted text-sm">Aucune entrée pour le moment.</p>
           )}
 
-          <ul className="flex flex-col gap-3 list-none overflow-auto scrollbar-thin max-h-60 p-4">
+          <ul className="flex flex-col gap-3 list-none overflow-auto scrollbar-thin max-h-125 p-4">
             {gameJournal.comments.map((journal) => (
               <li key={journal.id}>
                 <article className="bg-bg-card border border-brand-purple/20 rounded-2xl px-4 py-4 flex flex-col gap-2">
