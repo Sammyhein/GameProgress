@@ -28,7 +28,7 @@ export default function CreateAccount() {
               alt="Gamer+"
               width={200}
               height={40}
-              className="w-auto mx-auto"
+              className="h-10 w-auto mx-auto"
             />
           </Link>
         </header>
