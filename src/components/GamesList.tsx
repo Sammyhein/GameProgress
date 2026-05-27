@@ -52,7 +52,7 @@ export default function GamesList({ gamesList, userGameId }: GamesListProps) {
       <section aria-labelledby="findyourgame-title" className="bg-bg-card border border-brand-purple/20 rounded-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="flex flex-col gap-1">
           <h2 id="findyourgame-title" className="text-text-primary font-semibold">
-            Tu ne sais pas quoi jouer ?
+            Tu ne sais pas à quel jeu jouer ?
           </h2>
           <p className="text-text-secondary text-sm">
             Obtiens des suggestions personnalisées selon tes critères !
