@@ -114,7 +114,7 @@ export default async function Journal({ params }: { params: Promise<{ gameName: 
                 <p className="text-text-primary font-bold text-lg">{gameJournal.playedTime}h</p>
             </div>
 
-            {gameJournal.scale !== null ? (
+            {gameJournal.scale !== 0 ? (
                 <div className="bg-bg-card border border-brand-purple/20 rounded-xl px-4 py-3 flex flex-col gap-1">
                 <p className="text-text-muted text-xs uppercase tracking-wider">Note</p>
                 <p className="text-brand-cyan font-bold text-lg">⭐ {gameJournal.scale}/10</p>
